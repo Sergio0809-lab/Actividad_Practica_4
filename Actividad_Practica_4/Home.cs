@@ -1,17 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace Actividad_Practica_3
 {
     public partial class Home : Form
     {
-
         public Home()
         {
             InitializeComponent();
@@ -19,38 +13,26 @@ namespace Actividad_Practica_3
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Clientes clientes = new Clientes();
-            //clientes.ShowDialog();
+            Clientes clientes = new Clientes();
+            clientes.ShowDialog();
         }
 
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Categorias categoria = new Categorias();
-            //categoria.ShowDialog();
+            Categorias categoria = new Categorias();
+            categoria.ShowDialog();
         }
 
         private void productosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Productos productos = new Productos();
-            //productos.ShowDialog();
+            Productos productos = new Productos();
+            productos.ShowDialog();
         }
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Proveedores proveedor = new Proveedores();
-            //proveedor.ShowDialog();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Home
-            // 
-            this.ClientSize = new System.Drawing.Size(1372, 750);
-            this.Name = "Home";
-            this.ResumeLayout(false);
-
+            Proveedores proveedor = new Proveedores();
+            proveedor.ShowDialog();
         }
     }
 }

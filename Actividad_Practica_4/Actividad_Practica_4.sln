@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37027.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividad_Practica_4", "Actividad_Practica_4.csproj", "{4573F129-08F9-43CB-B249-740A317BA0BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividad_Practica_4", "Actividad_Practica_4.csproj", "{F473F0DB-B235-455A-A7A1-F4E69CF96910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4573F129-08F9-43CB-B249-740A317BA0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4573F129-08F9-43CB-B249-740A317BA0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4573F129-08F9-43CB-B249-740A317BA0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4573F129-08F9-43CB-B249-740A317BA0BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F473F0DB-B235-455A-A7A1-F4E69CF96910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F473F0DB-B235-455A-A7A1-F4E69CF96910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F473F0DB-B235-455A-A7A1-F4E69CF96910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F473F0DB-B235-455A-A7A1-F4E69CF96910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6139B63C-10A7-4BDF-AE02-0F00B2845914}
+		SolutionGuid = {6535E20D-8376-4015-930E-DE3058FE0A55}
 	EndGlobalSection
 EndGlobal
