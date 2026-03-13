@@ -38,10 +38,10 @@ namespace Actividad_Practica_3
            
         }
 
-        public Productos()
-        {
-            InitializeComponent();
-        }
+        //public Productos()
+        //{
+        //    InitializeComponent();
+        //}
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
@@ -111,34 +111,24 @@ namespace Actividad_Practica_3
                 return;
             }
 
-
-
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            Producto pro = new Producto()
             {
-                connection.Open();
+                ProductosId = Convert.ToInt32(textBox1.Text),
+                NombreProductos = textBox2.Text,
+                Descripcion = textBox6.Text,
+                Stock = Convert.ToInt32(textBox4.Text),
+                Categoriaid = Convert.ToInt32(comboBox1.SelectedValue),
+                Precio = Convert.ToDecimal(textBox7.Text),
+            };
 
+            _context.Productos.Add(pro);
 
-
-
-
-                string queryInsertarProductos = @"INSERT INTO Productos (Productosid, NombreProductos, Descripcion, Stock, Categoriaid, Precio)
-                                           VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox6.Text + "'," +
-                                                   "'" + textBox4.Text + "','" + comboBox1.SelectedValue + "'," +
-                                                   "'" + textBox7.Text + "')";
-
-                using (SqlCommand cmd = new SqlCommand(queryInsertarProductos, connection))
-                {
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Se ha insertado el producto en la base de datos.");
-                    }
-                }
-
-                connection.Close();
+            int rowsAffected = _context.SaveChanges();
+            if (rowsAffected > 0)
+            {
+                MessageBox.Show("Se ha insertado el producto en la base de datos.");
             }
+
 
 
 
@@ -151,27 +141,33 @@ namespace Actividad_Practica_3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (string.IsNullOrEmpty(textBox5.Text))
             {
-                connection.Open();
-
-                string queryEliminarProducto = @"DELETE FROM Productos WHERE Productosid = '" + textBox5.Text + "'";
-
-                using (SqlCommand cmd = new SqlCommand(queryEliminarProducto, connection))
-                {
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Se ha eliminado el producto de la base de datos.");
-                    }
-                }
-
-                connection.Close();
-
+                MessageBox.Show("Debe introducir un ID válido.");
+                return;
             }
+
+            int proid= Convert.ToInt32(textBox5.Text);
+
+            Producto pro = _context.Productos.FirstOrDefault(q => q.ProductosId.Equals(proid));
+            if (pro == null)
+            {
+                MessageBox.Show("Producto no existe.");
+                return;
+            }
+
+            _context.Productos.Remove(pro);
+            int rowsAffected = _context.SaveChanges();
+            if (rowsAffected > 0)
+            {
+                MessageBox.Show("Se ha eliminado el producto en la base de datos.");
+            }
+
+            
+
         }
+        
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -209,38 +205,72 @@ namespace Actividad_Practica_3
                 return;
             }
 
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            int productoID = Convert.ToInt32(textBox9.Text);
+
+            Producto productos = _context.Productos.FirstOrDefault(q => q.ProductosId.Equals(productoID));
+            if (productos == null)
             {
-                connection.Open();
-
-                string queryActualizarProductos = @"UPDATE Productos 
-                                                    SET 
-                                                        NombreProductos = '" + textBox8.Text + "', " +
-                                                        "Descripcion = '" + textBox10.Text + "',  " +
-                                                        "Stock = '" + textBox3.Text + "', " +
-                                                        "Categoriaid = '" + comboBox3.SelectedValue + "', " +
-                                                        "Precio = '" + textBox11.Text + "'" +
-                                                    "WHERE ProductosId = '" + textBox9.Text + "'";
-
-                using (SqlCommand cmd = new SqlCommand(queryActualizarProductos, connection))
-                {
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Se ha actualizado el producto en la base de datos.");
-                    }
-                }
-
-                connection.Close();
-
-
-
+                MessageBox.Show("Producto no existe.");
+                return;
             }
 
+            productos.NombreProductos = textBox8.Text;
+            productos.Descripcion = textBox10.Text;
+            productos.Stock = Convert.ToInt32(textBox3.Text);
+            productos.Categoriaid = Convert.ToInt32(comboBox3.SelectedValue);
+            productos.Precio = Convert.ToDecimal(textBox11.Text);
 
-
+            int rowsAffected = _context.SaveChanges();
+            if (rowsAffected > 0)
+            {
+                MessageBox.Show("Se ha actualizado el producto en la base de datos.");
             }
+
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
+
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+
+            //    string queryActualizarProductos = @"UPDATE Productos 
+            //                                        SET 
+            //                                            NombreProductos = '" + textBox8.Text + "', " +
+            //                                            "Descripcion = '" + textBox10.Text + "',  " +
+            //                                            "Stock = '" + textBox3.Text + "', " +
+            //                                            "Categoriaid = '" + comboBox3.SelectedValue + "', " +
+            //                                            "Precio = '" + textBox11.Text + "'" +
+            //                                        "WHERE ProductosId = '" + textBox9.Text + "'";
+
+            //    using (SqlCommand cmd = new SqlCommand(queryActualizarProductos, connection))
+            //    {
+            //        int rowsAffected = cmd.ExecuteNonQuery();
+            //        if (rowsAffected > 0)
+            //        {
+            //            MessageBox.Show("Se ha actualizado el producto en la base de datos.");
+            //        }
+            //    }
+
+            //    connection.Close();
+
+
+
+            //}
+
+
+
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Productos
+            // 
+            this.ClientSize = new System.Drawing.Size(614, 450);
+            this.Name = "Productos";
+            this.ResumeLayout(false);
+
+        }
     }
 }
