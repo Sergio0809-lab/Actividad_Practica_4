@@ -184,16 +184,6 @@ namespace Actividad_Practica_3
             }
         }
 
-        //private void InitializeComponent()
-        //{
-        //    this.SuspendLayout();
-        //    // 
-        //    // Proveedores
-        //    // 
-        //    this.ClientSize = new System.Drawing.Size(604, 424);
-        //    this.Name = "Proveedores";
-        //    this.ResumeLayout(false);
-
-        //}
+        
     }
 }

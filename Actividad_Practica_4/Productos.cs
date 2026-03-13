@@ -1,10 +1,12 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Actividad_Practica_4.modelo;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,37 +15,27 @@ namespace Actividad_Practica_3
 {
     public partial class Productos : Form
     {
-
+        public Actividad_Practica_1Entities _context;
+        
 
         private void cargarCmbCategorias()
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
+            _context = new Actividad_Practica_1Entities();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+            var categorias = _context.Categorias.Select(c => new {
+                ID = c.CategoriaId,
+                Nombre = c.NombreCategoria
+            }).ToList();
 
-                string queryCategorias = "SELECT * FROM Categoria;";
+            comboBox1.DataSource = categorias;
+            comboBox1.DisplayMember = "Nombre";
+            comboBox1.ValueMember = "ID";
 
-                using (SqlCommand cmd = new SqlCommand(queryCategorias, connection))
-                {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
+            comboBox3.DataSource = categorias;
+            comboBox3.DisplayMember = "Nombre";
+            comboBox3.ValueMember = "ID";
 
-                        comboBox1.DataSource = dt;
-                        comboBox1.DisplayMember = "NombreCategoria";
-                        comboBox1.ValueMember = "Categoriaid";
-
-                        comboBox3.DataSource = dt;
-                        comboBox3.DisplayMember = "NombreCategoria";
-                        comboBox3.ValueMember = "CategoriaID";
-                    }
-                }
-
-                connection.Close();
-            }
+           
         }
 
         public Productos()
@@ -68,32 +60,42 @@ namespace Actividad_Practica_3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var listaProductos = _context.Productos
+                   .Select(p => new {
+                       ID = p.ProductosId,
+                       Nombre = p.NombreProductos,
+                       Descripcion = p.Descripcion,
+                       Precio = p.Precio,
+                       Stock = p.Stock,
+                       Categoria = p.Categoria.NombreCategoria
+                   }).ToList();
 
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
+            dataGridView1.DataSource = listaProductos;
+            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
 
-                string queryProductos = @"SELECT p.ProductosId, p.NombreProductos, p.Descripcion, p.Precio, p.Stock, c.NombreCategoria
-	                                                FROM Productos p
-		                                                INNER JOIN  Categoria c
-			                                                ON p.CategoriaID = c.Categoriaid;";
+            //    string queryProductos = @"SELECT p.ProductosId, p.NombreProductos, p.Descripcion, p.Precio, p.Stock, c.NombreCategoria
+            //                                     FROM Productos p
+            //                                      INNER JOIN  Categoria c
+            //                                       ON p.CategoriaID = c.Categoriaid;";
 
-                using (SqlCommand cmd = new SqlCommand(queryProductos, connection))
-                {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //    using (SqlCommand cmd = new SqlCommand(queryProductos, connection))
+            //    {
+            //        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+            //        {
+            //            DataTable dt = new DataTable();
+            //            adapter.Fill(dt);
+            //            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-                        dataGridView1.DataSource = dt;
-                    }
-                }
+            //            dataGridView1.DataSource = dt;
+            //        }
+            //    }
 
-                connection.Close();
-            }
+            //    connection.Close();
+            //}
         }
 
         private void button2_Click(object sender, EventArgs e)

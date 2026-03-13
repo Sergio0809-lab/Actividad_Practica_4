@@ -1,3 +1,4 @@
+using Actividad_Practica_4.modelo;
 using System;
 using System.Data;
 using System.Drawing;
@@ -9,6 +10,7 @@ namespace Actividad_Practica_3
         public Home()
         {
             InitializeComponent();
+            
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
