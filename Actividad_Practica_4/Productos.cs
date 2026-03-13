@@ -71,31 +71,7 @@ namespace Actividad_Practica_3
                    }).ToList();
 
             dataGridView1.DataSource = listaProductos;
-            //string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Actividad_Practica_1;Integrated Security=True;";
-
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    connection.Open();
-
-            //    string queryProductos = @"SELECT p.ProductosId, p.NombreProductos, p.Descripcion, p.Precio, p.Stock, c.NombreCategoria
-            //                                     FROM Productos p
-            //                                      INNER JOIN  Categoria c
-            //                                       ON p.CategoriaID = c.Categoriaid;";
-
-            //    using (SqlCommand cmd = new SqlCommand(queryProductos, connection))
-            //    {
-            //        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-            //        {
-            //            DataTable dt = new DataTable();
-            //            adapter.Fill(dt);
-            //            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            //            dataGridView1.DataSource = dt;
-            //        }
-            //    }
-
-            //    connection.Close();
-            //}
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
