@@ -14,7 +14,11 @@ namespace Actividad_Practica_3
 {
     public partial class Proveedores : Form
     {
-       
+        public Proveedores()
+        {
+            InitializeComponent();
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -183,7 +187,5 @@ namespace Actividad_Practica_3
 
             }
         }
-
-        
     }
 }
